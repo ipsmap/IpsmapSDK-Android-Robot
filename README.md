@@ -77,8 +77,6 @@ compile ('com.ipsmap:ipsmap:1.3.6', {
                 .build()
 ```
 
-
-
 ```
 将微信分享通过浏览器打开的acitivty 中加入配置 ,建议新建一个界面,不要现有的逻辑冲突.
 这个界面的功能一个中转的功能,是通过浏览器唤起这个界面,这个界面打开地图.
@@ -156,10 +154,6 @@ protected void onDestroy() {
 ## 混淆
 
 ```
--dontwarn com.baidu.**
--keep class com.baidu.** {*;}
--dontwarn com.iflytek.**
--keep class com.iflytek.**{*;}
 -keep public class com.sails.engine.patterns.IconPatterns
 ```
 
