@@ -61,15 +61,9 @@ getSupportFragmentManager().beginTransaction()
                             .commit();
 
 调用这个方法前做好做一下延时1500ms 然后调用.
-
-
 ```
 
-定位监听,获取当前的位置,可以参考ipslocation demo ,需要提前获取定位和蓝牙权限
 
-```
-
-```
 
 activity 结束时调用
 
