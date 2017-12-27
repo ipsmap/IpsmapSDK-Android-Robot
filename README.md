@@ -55,7 +55,7 @@ compile ('com.ipsmap:ipsmap:1.3.6', {
 首先需要获取
 Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET
 动态权限申请(可以参考demo),然后去打开地图的IpsmapRobotFragment
-
+ipsmapTVFragment = IpsmapRobotFragment.getInstance();
 getSupportFragmentManager().beginTransaction()
                             .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
                             .commit();
