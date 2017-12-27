@@ -26,43 +26,15 @@ compile ('com.ipsmap:ipsmap:1.3.6', {
 导入IpsmapSDK后需要
 
 ```
-     <!-- 注意新增的权限,注意添加-->
-        <uses-permission android:name="android.permission.VIBRATE" />
-         <!-- sdk 使用需要的权限 -->
-         <!-- if use wifi indoor positioning -->
-         <uses-permission android:name="android.permission.INTERNET" />
-         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-         <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-         <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-         <!-- if use ble indoor positioning -->
-         <uses-permission android:name="android.permission.BLUETOOTH" />
-         <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-         <!-- general permission -->
-         <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-         <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-         <!-- 连接网络权限，用于执行云端语音能力 -->
-         <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
-         <uses-permission android:name="android.permission.RECORD_AUDIO" />
-         <!-- 读取网络信息状态 -->
-         <!-- 允许程序改变网络连接状态 -->
-         <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-         <!-- 读取手机信息权限 -->
-         <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-         <!-- 读取联系人权限，上传联系人需要用到此权限 -->
-         <uses-permission android:name="android.permission.READ_CONTACTS" />
-         <!-- 外存储写权限，构建语法需要用到此权限 -->
-         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-         <!-- 外存储读权限，构建语法需要用到此权限 -->
-         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-         <!-- 配置权限，用来记录应用配置信息 -->
-         <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-         <uses-permission android:name="android.permission.READ_LOGS" />
-         <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-         <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-         <!-- 判断程序是否在前台运行,必须 -->
-         <uses-permission android:name="android.permission.GET_TASKS" />
-         <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-         <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 ```
 
 ## 使用
@@ -77,42 +49,7 @@ compile ('com.ipsmap:ipsmap:1.3.6', {
                 .build()
 ```
 
-```
-将微信分享通过浏览器打开的acitivty 中加入配置 ,建议新建一个界面,不要现有的逻辑冲突.
-这个界面的功能一个中转的功能,是通过浏览器唤起这个界面,这个界面打开地图.
-<!--微信分享-->
-    <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data
-            android:host="share"
-            android:scheme=你的scheme></data>
-    </intent-filter>
-<!--微信分享结束-->
 
-重写以下两个方法
-  @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share);
-        //如果不是新建的页面判断一下scheme
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                IpsMapSDK.shareLinkToMapView(getIntent());
-                finish();
-            }
-        }, 500);
-    }
-
-    @Overrid
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        IpsMapSDK.shareLinkToMapView(intent);
-        finish();
-    }
-```
 
 启动地图
 
