@@ -1,7 +1,7 @@
 ### [IpsmapSDK-Android-Robot](https://github.com/ipsmap/IpsmapSDK-Android-Robot)
 
 [![license](https://img.shields.io/hexpm/l/plug.svg)](https://raw.githubusercontent.com/typ0520/fastdex/master/LICENSE)  
-[![Download](https://api.bintray.com/packages/xun/maven/com.ipsmap/images/download.svg) ](https://bintray.com/xun/maven/com.ipsmap/_latestVersion)  
+[![Download](https://api.bintray.com/packages/xun/maven/com.ipsmap/images/download.svg)](https://bintray.com/xun/maven/com.ipsmap/_latestVersion)  
 [![API](https://img.shields.io/badge/API-18%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=18)  
 [![Contact](https://img.shields.io/badge/Author-IpsMap-orange.svg?style=flat)](http://ipsmap.com)
 
@@ -72,52 +72,12 @@ compile ('com.ipsmap:ipsmap:1.3.6', {
 在Application 的onCreate 方法中进行初始化
 
 ```
-    使用默认配置信息
-    IpsMapSDK.init(context, IPSMAP_APP_KEY);
-    或
-    定制配置信息 ,使用微信分享功能请实现相关的接口
-    IpsMapSDK.init(new IpsMapSDK.Configuration.Builder(context)
-                .appKey(Constants.IPSMAP_APP_KEY)
-                .shareToWechatListener(this)
-                //正式版请关闭 默认是关闭的
-                .debug(false)
-                .build());
+        IpsMapRobotSDK.init(new IpsMapRobotSDK.Configuration.Builder(context)
+                .debug(true)
+                .build()
 ```
 
-SDK内部实现了分享功能，使用的前提是需要申请微信的appkey，并且需要实现接口ShareToWechatListener接口  
-参考代码如下：
 
-```
-    参考代码
-   @Override
-    public void shareToWechat(String url, String title, String description, Bitmap bitmap) {
-        try {
-            IWXAPI wxApi = WXAPIFactory.createWXAPI(this, "YOUR WECHAT APP_ID");
-            wxApi.registerApp("YOUR WECHAT APP_ID");
-            if (!wxApi.isWXAppInstalled()) {
-                Toast.makeText(this, "未安装微信", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            WXWebpageObject webpage = new WXWebpageObject();
-            webpage.webpageUrl = url;
-            WXMediaMessage msg = new WXMediaMessage(webpage);
-            msg.title = title;
-            msg.description = description;
-            msg.setThumbImage(bitmap);
-            SendMessageToWX.Req req = new SendMessageToWX.Req();
-            req.transaction = buildTransaction("webpage");
-            req.message = msg;
-            req.scene = SendMessageToWX.Req.WXSceneSession;
-            wxApi.sendReq(req);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String buildTransaction(final String type) {
-        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
-    }
-```
 
 ```
 将微信分享通过浏览器打开的acitivty 中加入配置 ,建议新建一个界面,不要现有的逻辑冲突.
@@ -148,7 +108,7 @@ SDK内部实现了分享功能，使用的前提是需要申请微信的appkey�
         }, 500);
     }
 
-    @Override
+    @Overrid
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         IpsMapSDK.shareLinkToMapView(intent);
