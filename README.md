@@ -63,8 +63,6 @@ getSupportFragmentManager().beginTransaction()
 调用这个方法前做好做一下延时1500ms 然后调用.
 ```
 
-
-
 activity 结束时调用
 
 ```
@@ -81,8 +79,6 @@ protected void onDestroy() {
 ```
 -keep public class com.sails.engine.patterns.IconPatterns
 ```
-
-微信分享以及复制跳转请参考demo
 
 ## FAQ
 
