@@ -5,7 +5,7 @@
 [![API](https://img.shields.io/badge/API-18%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=18)  
 [![Contact](https://img.shields.io/badge/Author-IpsMap-orange.svg?style=flat)](http://ipsmap.com)
 
-IpsmapSDK-Android 是一套基于 Android 4.3 及以上版本的室内地图应用程序开发接口，供开发者在自己的Android应用中加入室内地图相关的功能，包括：地图显示（多楼层、多栋楼）、室内导航、模拟导航、语音播报等功能。
+[IpsmapSDK-Android-Robot](https://github.com/ipsmap/IpsmapSDK-Android-Robot) 是一套基于 Android 4.3 及以上版本的室内地图应用程序开发接口，供开发者在自己的Android平板中加入室内地图相关的功能，包括：地图显示（多楼层、多栋楼）、室内导航、模拟导航等功能。
 
 ## 获取AppKey和MapId
 
@@ -20,15 +20,6 @@ compile ('com.ipsmap:ipsmap:1.3.6', {
 ```
 
 如果仅仅使用定位模块请参考ipslocation demo README
-
-## 目前支持的cpu 架构 arm,暂时不支持其他架构,请配置下面的cpu架构
-
-```
-ndk {
-            // 设置支持的 SO 库构架
-            abiFilters 'armeabi'
-}
-```
 
 ## 加入权限
 
