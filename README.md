@@ -1,7 +1,7 @@
 # IpsmapSDK-Android
 
 [![license](https://img.shields.io/hexpm/l/plug.svg)](https://raw.githubusercontent.com/typ0520/fastdex/master/LICENSE)
-[![Download](https://api.bintray.com/packages/xun/maven/com.ipsmap/images/download.svg) ](https://bintray.com/xun/maven/com.ipsmap/_latestVersion)
+[![Download](https://api.bintray.com/packages/xun/maven/com.ipsmap.robot/images/download.svg) ](https://bintray.com/xun/maven/com.ipsmap.robot/_latestVersion)
 [![API](https://img.shields.io/badge/API-18%2B-green.svg?style=flat)](https://android-arsenal.com/api?level=18)
 [![Contact](https://img.shields.io/badge/Author-IpsMap-orange.svg?style=flat)](http://ipsmap.com)
 
