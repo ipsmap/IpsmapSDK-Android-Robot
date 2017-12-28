@@ -2,6 +2,7 @@ package com.daoyixun.irobot;
 
 
 import android.Manifest;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.daoyixun.robot.IpsMapRobotSDK;
 import com.daoyixun.robot.ui.fragment.IpsmapRobotFragment;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button start2;
     private Button start3;
     private Button start4;
+    private FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView(Bundle savedInstanceState) {
+        frameLayout = (FrameLayout) findViewById(R.id.fl_content);
         start1 = (Button) findViewById(R.id.btn_start_sdk_activity1);
         start1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                frameLayout.setVisibility(View.VISIBLE);
                 if (savedInstanceState != null) {
                     ipsmapTVFragment = (IpsmapRobotFragment) getSupportFragmentManager().findFragmentByTag("ipsmap");
                     ipsmapTVFragment.onDestroy();
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
                             .commit();
+
                 } else {
                     ipsmapTVFragment = IpsmapRobotFragment.getInstance();
                     getSupportFragmentManager().beginTransaction()
@@ -114,17 +120,18 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                frameLayout.setVisibility(View.VISIBLE);
                 if (savedInstanceState != null) {
                     ipsmapTVFragment = (IpsmapRobotFragment) getSupportFragmentManager().findFragmentByTag("ipsmap");
                     ipsmapTVFragment.onDestroy();
                     ipsmapTVFragment = IpsmapRobotFragment.getInstance(targetId);
                     getSupportFragmentManager().beginTransaction()
-                            .add(com.daoyixun.robot.R.id.fl_content, ipsmapTVFragment, "ipsmap")
+                            .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
                             .commit();
                 } else {
                     ipsmapTVFragment = IpsmapRobotFragment.getInstance(targetId);
                     getSupportFragmentManager().beginTransaction()
-                            .add(com.daoyixun.robot.R.id.fl_content, ipsmapTVFragment, "ipsmap")
+                            .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
                             .commit();
                 }
 
@@ -142,6 +149,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (frameLayout.getVisibility() == View.VISIBLE){
+            frameLayout.setVisibility(View.GONE);
+            ipsmapTVFragment.onDestroy();
+            ipsmapTVFragment = null;
+            return;
+        }
         super.onBackPressed();
         System.exit(0);
         android.os.Process.killProcess(android.os.Process.myPid());

@@ -16,38 +16,55 @@
         <!--android:layout_alignParentBottom="true"-->
         <!--android:layout_alignParentRight="true"/>-->
 
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_start_sdk_activity1"
+
+    </FrameLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_centerHorizontal="true"
-        android:text="方式1"
-        android:layout_alignParentBottom="true"/>
- <Button
-        android:id="@+id/btn_start_sdk_activity2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_centerHorizontal="true"
-        android:text="方式2"
-        android:layout_alignParentBottom="true"/>
- <Button
-        android:id="@+id/btn_start_sdk_activity3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_centerHorizontal="true"
-        android:text="方式3"
-        android:layout_alignParentBottom="true"/>
- <Button
-        android:id="@+id/btn_start_sdk_activity4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_centerHorizontal="true"
-        android:text="方式4"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_start_sdk_activity1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_centerHorizontal="true"
+            android:text="方式1"
+            android:layout_alignParentBottom="true"/>
+        <Button
+            android:id="@+id/btn_start_sdk_activity2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_centerHorizontal="true"
+            android:text="方式2"
+            android:layout_alignParentBottom="true"/>
+        <Button
+            android:id="@+id/btn_start_sdk_activity3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_centerHorizontal="true"
+            android:text="方式3"
+            android:layout_alignParentBottom="true"/>
+        <Button
+            android:id="@+id/btn_start_sdk_activity4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_centerHorizontal="true"
+            android:text="方式4"
+            android:layout_alignParentBottom="true"/>
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
