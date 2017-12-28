@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,49 +22,67 @@ import com.daoyixun.robot.utils.T;
 
 public class MainActivity extends AppCompatActivity {
 
-//    private IpsmapRobotFragment ipsmapTVFragment;
+    //    private IpsmapRobotFragment ipsmapTVFragment;
     protected static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0x01;
-    private String stringExtra;
+    private String targetId;
     private IpsmapRobotFragment ipsmapTVFragment;
+    private Button start1;
+    private Button start2;
+    private Button start3;
+    private Button start4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView(savedInstanceState);
-//        stringExtra = "3mEmXmQJoN";
+//        targetId = "3mEmXmQJoN";
     }
 
     private void initView(Bundle savedInstanceState) {
-
-// 使用sdk 默认的 acitivity
-//        IpsMapRobotSDK.openIpsMapActivity(getBaseContext(),"3mEmXmQJoN");
-//
-        new Handler().postDelayed(new Runnable() {
+        start1 = (Button) findViewById(R.id.btn_start_sdk_activity1);
+        start1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-//                IpsMapRobotSDK.openIpsMapActivity(getBaseContext());
-                IpsMapRobotSDK.openIpsMapActivity(getBaseContext(),"3mEmXmQJoN");
-                finish();
+            public void onClick(View v) {
+                IpsMapRobotSDK.openIpsMapActivity(getBaseContext());
             }
-        }, 5000);
+        });
 
-        // 使用fragment 自定义显示
-//        stringExtra = "3mEmXmQJoN";
-//        if (TextUtils.isEmpty(stringExtra)){
-//            if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)) {
-//                showFragment(savedInstanceState);
-//            } else {
-//                requestPermission(MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//            }
-//        }else {
-//            if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)) {
-//                showFragment(savedInstanceState, stringExtra);
-//            } else {
-//                requestPermission(MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//            }
-//        }
 
+        start2 = (Button) findViewById(R.id.btn_start_sdk_activity2);
+        start2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                targetId = "3mEmXmQJoN";
+                IpsMapRobotSDK.openIpsMapActivity(getBaseContext(), targetId);
+            }
+        });
+
+
+        start3 = (Button) findViewById(R.id.btn_start_sdk_activity3);
+        start3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)) {
+                    showFragment(savedInstanceState);
+                } else {
+                    requestPermission(MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                }
+            }
+        });
+
+
+        start4 = (Button) findViewById(R.id.btn_start_sdk_activity4);
+        start4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)) {
+                    showFragment(savedInstanceState, targetId);
+                } else {
+                    requestPermission(MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                }
+            }
+        });
 
     }
 
@@ -91,8 +108,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 1500);
     }
-//
-    private void showFragment(Bundle savedInstanceState ,String targetId) {
+
+    //
+    private void showFragment(Bundle savedInstanceState, String targetId) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -116,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (ipsmapTVFragment != null){
+        if (ipsmapTVFragment != null) {
             ipsmapTVFragment.onDestroy();
         }
         super.onDestroy();
@@ -189,10 +207,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)) {
-                    if (TextUtils.isEmpty(stringExtra)){
+                    if (TextUtils.isEmpty(targetId)) {
                         showFragment(null);
-                    }else {
-                        showFragment(null, stringExtra);
+                    } else {
+                        showFragment(null, targetId);
                     }
                 }
                 break;
