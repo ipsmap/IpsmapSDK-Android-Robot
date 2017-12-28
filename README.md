@@ -13,7 +13,7 @@ IpsmapSDK-Android 是一套基于 Android 4.3 及以上版本的室内地图应�
 ## 添加依赖
 
 ```
-compile ('com.ipsmap:ipsmap-robot:0.0.1.3', {
+compile ('com.ipsmap:ipsmap-robot:0.0.1.4', {
         exclude group: 'com.android.support'
     })
 ```
@@ -64,7 +64,7 @@ ipsmapTVFragment = IpsmapRobotFragment.getInstance();
 getSupportFragmentManager().beginTransaction()
         .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
         .commit();
-调用这个方法前做好做一下延时1500ms 然后调用.
+
 
 ```
 启动地图方式4,(自定义IpsmapRobotFragment显示位置,并且携带targetId参数) 
@@ -90,21 +90,16 @@ protected void onDestroy() {
 
 
 
-activity 结束时调用
-```
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    ipsClient.stop();
-}
-```
-
 ## 混淆
 ```
 -keep public class com.sails.engine.patterns.IconPatterns
 ```
+## 对接完成
+```
+出现激活码弹框,程序不崩溃和有冲突
+```
 
-微信分享以及复制跳转请参考demo
+
 
 ## FAQ
 1.0
