@@ -47,27 +47,31 @@ IpsMapRobotSDK.init(new IpsMapRobotSDK.Configuration.Builder(context)
 IpsMapRobotSDK.openIpsMapActivity(getBaseContext());
 
 ```
-启动地图方式2,(携带地图targetId)(建议) 
-              
-
-```
-
-```
 
 启动地图方式2,(携带地图targetId)(建议) 
 
 ```
+IpsMapRobotSDK.openIpsMapActivity(getBaseContext(),targetId);
 
 ```
 
 启动地图方式3,(自定义IpsmapRobotFragment显示位置)
 ```
+首先需要获取
+Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET
+动态权限申请(可以参考demo),然后去打开地图的IpsmapRobotFragment
+ipsmapTVFragment = IpsmapRobotFragment.getInstance();
+getSupportFragmentManager().beginTransaction()
+        .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
+        .commit();
+调用这个方法前做好做一下延时1500ms 然后调用.
 
 ```
 启动地图方式4,(自定义IpsmapRobotFragment显示位置,并且携带targetId参数) 
 
 ```
-
+ipsmapTVFragment=IpsmapRobotFragment.getInstance(targetId);
+getSupportFragmentManager().beginTransaction().add(com.daoyixun.robot.R.id.fl_content,ipsmapTVFragment,"ipsmap").commit();
 ```
 如果使用自定义自定义IpsmapRobotFragment显示位置,注意activity 结束时调用 
 
@@ -97,10 +101,6 @@ protected void onDestroy() {
 
 ## 混淆
 ```
--dontwarn com.baidu.**
--keep class com.baidu.** {*;}
--dontwarn com.iflytek.**
--keep class com.iflytek.**{*;}
 -keep public class com.sails.engine.patterns.IconPatterns
 ```
 
