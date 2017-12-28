@@ -11,31 +11,60 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+
+import com.daoyixun.robot.IpsMapRobotSDK;
+import com.daoyixun.robot.ui.fragment.IpsmapRobotFragment;
+import com.daoyixun.robot.utils.T;
 
 
 public class MainActivity extends AppCompatActivity {
 
 //    private IpsmapRobotFragment ipsmapTVFragment;
     protected static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0x01;
+    private String stringExtra;
+    private IpsmapRobotFragment ipsmapTVFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView(savedInstanceState);
+//        stringExtra = "3mEmXmQJoN";
     }
 
     private void initView(Bundle savedInstanceState) {
 
-        if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)) {
-            showFragment(savedInstanceState);
-        } else {
-            requestPermission(MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//            requestPermission(MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE );
-        }
+// 使用sdk 默认的 acitivity
+//        IpsMapRobotSDK.openIpsMapActivity(getBaseContext(),"3mEmXmQJoN");
+//
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+//                IpsMapRobotSDK.openIpsMapActivity(getBaseContext());
+                IpsMapRobotSDK.openIpsMapActivity(getBaseContext(),"3mEmXmQJoN");
+                finish();
+            }
+        }, 5000);
+
+        // 使用fragment 自定义显示
+//        stringExtra = "3mEmXmQJoN";
+//        if (TextUtils.isEmpty(stringExtra)){
+//            if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)) {
+//                showFragment(savedInstanceState);
+//            } else {
+//                requestPermission(MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//            }
+//        }else {
+//            if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)) {
+//                showFragment(savedInstanceState, stringExtra);
+//            } else {
+//                requestPermission(MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//            }
+//        }
 
 
     }
@@ -45,24 +74,52 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                if (savedInstanceState != null) {
-//                    ipsmapTVFragment = (IpsmapRobotFragment) getSupportFragmentManager().findFragmentByTag("ipsmap");
-//                    ipsmapTVFragment.onDestroy();
-////            ipsmapTVFragment = IpsmapRobotFragment.getInstance(targetId);
-//                    ipsmapTVFragment = IpsmapRobotFragment.getInstance();
-//                    getSupportFragmentManager().beginTransaction()
-//                            .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
-//                            .commit();
-//                } else {
-////            ipsmapTVFragment = IpsmapRobotFragment.getInstance(targetId);
-//                    ipsmapTVFragment = IpsmapRobotFragment.getInstance();
-//                    getSupportFragmentManager().beginTransaction()
-//                            .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
-//                            .commit();
-//                }
+                if (savedInstanceState != null) {
+                    ipsmapTVFragment = (IpsmapRobotFragment) getSupportFragmentManager().findFragmentByTag("ipsmap");
+                    ipsmapTVFragment.onDestroy();
+                    ipsmapTVFragment = IpsmapRobotFragment.getInstance();
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
+                            .commit();
+                } else {
+                    ipsmapTVFragment = IpsmapRobotFragment.getInstance();
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
+                            .commit();
+                }
 
             }
         }, 1500);
+    }
+//
+    private void showFragment(Bundle savedInstanceState ,String targetId) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (savedInstanceState != null) {
+                    ipsmapTVFragment = (IpsmapRobotFragment) getSupportFragmentManager().findFragmentByTag("ipsmap");
+                    ipsmapTVFragment.onDestroy();
+                    ipsmapTVFragment = IpsmapRobotFragment.getInstance(targetId);
+                    getSupportFragmentManager().beginTransaction()
+                            .add(com.daoyixun.robot.R.id.fl_content, ipsmapTVFragment, "ipsmap")
+                            .commit();
+                } else {
+                    ipsmapTVFragment = IpsmapRobotFragment.getInstance(targetId);
+                    getSupportFragmentManager().beginTransaction()
+                            .add(com.daoyixun.robot.R.id.fl_content, ipsmapTVFragment, "ipsmap")
+                            .commit();
+                }
+
+            }
+        }, 1500);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (ipsmapTVFragment != null){
+            ipsmapTVFragment.onDestroy();
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -71,8 +128,6 @@ public class MainActivity extends AppCompatActivity {
         System.exit(0);
         android.os.Process.killProcess(android.os.Process.myPid());
     }
-
-
 
     /**
      * 多权限判断
@@ -125,17 +180,20 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < grantResults.length; i++) {
                     if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
                         if (i == 0) {
-//                            T.showShort(R.string.ipsmap_please_grant_location);
+                            T.showShort(com.daoyixun.robot.R.string.ipsmap_please_grant_location);
                         } else if (i == 1) {
-//                            T.showShort(R.string.ipsmap_please_grant_permission_write);
+                            T.showShort(com.daoyixun.robot.R.string.ipsmap_please_grant_permission_write);
                         }
-
                         return;
                     }
                 }
 
                 if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)) {
-                    showFragment(null);
+                    if (TextUtils.isEmpty(stringExtra)){
+                        showFragment(null);
+                    }else {
+                        showFragment(null, stringExtra);
+                    }
                 }
                 break;
 

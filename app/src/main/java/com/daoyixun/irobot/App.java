@@ -3,6 +3,8 @@ package com.daoyixun.irobot;
 import android.app.Application;
 import android.content.Context;
 
+import com.daoyixun.robot.IpsMapRobotSDK;
+
 
 /**
  * author:chen
@@ -18,9 +20,9 @@ public class App extends Application {
     public void onCreate() {
         context = this;
         super.onCreate();
-//        IpsMapRobotSDK.init(new IpsMapRobotSDK.Configuration.Builder(context)
-//                .debug(true)
-//                .build());
+        IpsMapRobotSDK.init(new IpsMapRobotSDK.Configuration.Builder(context)
+                .debug(true)
+                .build());
     }
 
 }
