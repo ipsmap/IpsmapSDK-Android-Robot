@@ -59,8 +59,10 @@ sdk 使用方法,
 在Application 的onCreate 方法中进行初始化
 ``` 
 IpsMapRobotSDK.init(new IpsMapRobotSDK.Configuration.Builder(context)
-.debug(false)
-.build()
+    .debug(true)
+    //预览模式下不需要激活码
+//                .preview()
+    .build());
                 
 ```
 
