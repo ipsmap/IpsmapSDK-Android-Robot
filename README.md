@@ -32,8 +32,30 @@ compile ('com.ipsmap:ipsmap-robot:0.0.1.4', {
 ```
 
 ## 使用
-初始化
 
+外部app 调用 IpsRobot
+
+app 下载地址
+http://ipsmap.oss-cn-shanghai.aliyuncs.com/IpsRobotApk/app-release.apk
+``` 
+Intent intent = new Intent();
+//第一种方式
+ComponentName cn = new ComponentName("com.daoyixun.ipsrobot", "com.daoyixun.ipsrobot.MainActivity");
+try {
+    intent.setComponent(cn);
+    intent.setAction("android.intent.action.MAIN");
+    //需要传入参数,可以传入参数,不需要可以不传入
+     //String id = "ddK075hevW";
+    //intent.putExtra("TARGETID", id);
+    startActivity(intent);
+} catch (Exception e) {
+    Toast.makeText(getBaseContext(),"没有安装道一循",Toast.LENGTH_SHORT).show();
+    //TODO  可以在这里提示用户没有安装应用或找不到指定Activity，或者是做其他的操作
+}
+                
+```
+sdk 使用方法,
+初始化
 在Application 的onCreate 方法中进行初始化
 ``` 
 IpsMapRobotSDK.init(new IpsMapRobotSDK.Configuration.Builder(context)
