@@ -36,7 +36,7 @@ compile ('com.ipsmap:ipsmap-robot:0.0.1.6', {
 外部app 调用 IpsRobot
 
 app 下载地址
-http://ipsmap.oss-cn-shanghai.aliyuncs.com/IpsRobotApk/app-release.apk
+http://ipsmap.oss-cn-shanghai.aliyuncs.com/android%E6%9B%B4%E6%96%B0%E5%8C%85/robot/app-release.apk
 ``` 
 Intent intent = new Intent();
 //第一种方式
