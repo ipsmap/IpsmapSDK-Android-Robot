@@ -152,7 +152,7 @@ app如果使用了okhttp ,glide ...出现第三发开源库 冲突
 
  3.0
  
-![](/pic/AC0BDB3E-C313-4644-AB5F-F3C8FA209AEC.png) 
+
 ```
 
 
@@ -172,4 +172,16 @@ app如果使用了okhttp ,glide ...出现第三发开源库 冲突
      }
 ```
 
+4.0
+
+![](/pic/3181517275554_.pic_hd.jpg) 
+
+
+```
+方法一:加入 依赖
+compile 'com.android.support:appcompat-v7:25.3.1'
+compile 'com.android.support:design:25.3.1'
+方法二:这样 引入
+ compile 'com.ipsmap:ipsmap-robot:0.0.1.7'
+```
 
