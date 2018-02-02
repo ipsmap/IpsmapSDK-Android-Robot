@@ -8,6 +8,7 @@
     >
 
     <!--<FrameLayout-->
+        <!--android:visibility="gone"-->
         <!--android:id="@+id/fl_content"-->
         <!--android:layout_width="913dp"-->
         <!--android:layout_height="493dp"-->
@@ -62,6 +63,45 @@
             android:text="方式4"
             android:layout_alignParentBottom="true"/>
 
+
+        <Button
+            android:id="@+id/btn_hint_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:text="隐藏地图"
+            />
+        <Button
+            android:id="@+id/btn_targetid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:text="传递目的地参数(界面显示的时候)"
+            />
+
+        <Button
+            android:id="@+id/btn_hint_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:text="隐藏搜索"
+            />
+
+        <Button
+            android:id="@+id/btn_set_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:text="设置秘钥"
+            />
 
     </LinearLayout>
 

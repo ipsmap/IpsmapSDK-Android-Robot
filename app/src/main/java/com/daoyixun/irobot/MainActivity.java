@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -33,17 +36,39 @@ public class MainActivity extends AppCompatActivity {
     private Button start3;
     private Button start4;
     private FrameLayout frameLayout;
+    private Button btnHintMap;
+    private Button btnTargetId;
+    private Button btnHintSearch;
+    private FrameLayout flContent;
+    private Button btnSetKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        /*set it to be full screen*/
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         setContentView(R.layout.activity_main);
         initView(savedInstanceState);
+        targetId = "sYdkRBYQB3";
+
+
 //        targetId = "3mEmXmQJoN";
     }
 
     private void initView(Bundle savedInstanceState) {
         frameLayout = (FrameLayout) findViewById(R.id.fl_content);
+        btnHintMap = (Button) findViewById(R.id.btn_hint_map);
+        btnTargetId = (Button) findViewById(R.id.btn_targetid);
+        btnHintSearch = (Button) findViewById(R.id.btn_hint_search);
+        flContent = (FrameLayout)findViewById(R.id.fl_content);
+
+        btnSetKey = (Button) findViewById(R.id.btn_set_key);
+
         start1 = (Button) findViewById(R.id.btn_start_sdk_activity1);
         start1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         start2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                targetId = "3mEmXmQJoN";
                 IpsMapRobotSDK.openIpsMapActivity(getBaseContext(), targetId);
             }
         });
@@ -84,6 +108,64 @@ public class MainActivity extends AppCompatActivity {
                     showFragment(savedInstanceState, targetId);
                 } else {
                     requestPermission(MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                }
+            }
+        });
+
+
+
+        btnSetKey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ipsmapTVFragment != null){
+                    ipsmapTVFragment.setIpsmapKey("svQULnJTqz");
+                }
+            }
+        });
+        btnHintMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ipsmapTVFragment != null){
+                    if (flContent.getVisibility() ==View.VISIBLE ){
+                        flContent.setVisibility(View.GONE);
+                    }else {
+                        flContent.setVisibility(View.VISIBLE);
+                    }
+
+                }
+            }
+        });
+
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (ipsmapTVFragment != null){
+//                    ipsmapTVFragment.setIpsmapKey("sPkHX4LIik");
+//                }
+//            }
+//        }, 5000);
+
+        btnTargetId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ipsmapTVFragment!= null){
+                    targetId = "ddK075hevW";
+                    ipsmapTVFragment.queryLRDataByVocabularyId(targetId);
+                }
+            }
+        });
+
+        btnHintSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ipsmapTVFragment!= null){
+                    if (ipsmapTVFragment.getSearchHintOrShowStatus()){
+                        ipsmapTVFragment.setSearchHintOrShow(false);
+                    }else {
+                        ipsmapTVFragment.setSearchHintOrShow(true);
+                    }
+
                 }
             }
         });
@@ -137,6 +219,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }, 1500);
+
+
+
+
     }
 
     @Override
@@ -144,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
         if (ipsmapTVFragment != null) {
             ipsmapTVFragment.onDestroy();
         }
+        frameLayout.removeAllViews();
         super.onDestroy();
     }
 
