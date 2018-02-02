@@ -160,12 +160,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ipsmapTVFragment!= null){
-                    if (ipsmapTVFragment.getSearchHintOrShowStatus()){
                         ipsmapTVFragment.setSearchHintOrShow(false);
-                    }else {
-                        ipsmapTVFragment.setSearchHintOrShow(true);
-                    }
-
                 }
             }
         });
