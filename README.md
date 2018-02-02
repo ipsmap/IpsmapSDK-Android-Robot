@@ -108,7 +108,7 @@ getSupportFragmentManager().beginTransaction().add(com.daoyixun.robot.R.id.fl_co
 
 在激活码提示框出来后 ,可以 通过api 直接设置秘钥 
 ```
-  if (ipsmapTVFragment != null){
+                if (ipsmapTVFragment != null){
                     ipsmapTVFragment.setIpsmapKey("svQULnJTqz");
                 }
 ```
@@ -128,12 +128,7 @@ getSupportFragmentManager().beginTransaction().add(com.daoyixun.robot.R.id.fl_co
 地图显示的时候设置 搜索 的显示 和隐藏 默认 是显示的
 ```
                 if (ipsmapTVFragment!= null){
-                    if (ipsmapTVFragment.getSearchHintOrShowStatus()){
                         ipsmapTVFragment.setSearchHintOrShow(false);
-                    }else {
-                        ipsmapTVFragment.setSearchHintOrShow(true);
-                    }
-
                 }
 ```
 如果使用自定义自定义IpsmapRobotFragment显示位置,注意activity 结束时调用 ,不要为了隐藏界面 调用这个方法
