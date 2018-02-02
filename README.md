@@ -46,7 +46,7 @@ try {
     intent.setAction("android.intent.action.MAIN");
     //需要传入参数,可以传入参数,不需要可以不传入
      //String id = "ddK075hevW";
-    //intent.putExtra("TARGETID", id);
+    //intent.putExtra("target_id", id);
     startActivity(intent);
 } catch (Exception e) {
     Toast.makeText(getBaseContext(),"没有安装道一循",Toast.LENGTH_SHORT).show();
@@ -97,6 +97,10 @@ getSupportFragmentManager().beginTransaction()
 ipsmapTVFragment=IpsmapRobotFragment.getInstance(targetId);
 getSupportFragmentManager().beginTransaction().add(com.daoyixun.robot.R.id.fl_content,ipsmapTVFragment,"ipsmap").commit();
 ```
+地图显示的时候,传递id,直接跳转到目的地 (自定义IpsmapRobotFragment显示位置,并且携带targetId参数) 
+```
+queryLRDataByVocabularyId(String targetId);
+```
 如果使用自定义自定义IpsmapRobotFragment显示位置,注意activity 结束时调用 
 
 ```
@@ -106,6 +110,8 @@ protected void onDestroy() {
     if (ipsmapTVFragment != null){
         ipsmapTVFragment.onDestroy();
     }
+    //隐藏 界面 
+    frameLayout.removeAllViews();
     super.onDestroy();
 }
 
