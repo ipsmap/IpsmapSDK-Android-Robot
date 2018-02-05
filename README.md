@@ -131,6 +131,35 @@ getSupportFragmentManager().beginTransaction().add(com.daoyixun.robot.R.id.fl_co
                         ipsmapTVFragment.setSearchHintOrShow(false);
                 }
 ```
+
+地图显示的时候设置 home 回退键 的显示 和隐藏 默认 是显示的
+```
+                if (ipsmapTVFragment!= null){
+                        ipsmapTVFragment.setHomeButtonShowOrHide(false);
+                }
+```
+地图加载完毕的回调,在回调用控制父窗体的显示和隐藏
+```
+                ipsmapTVFragment.registerLoadMapListener(new LoadMapListener() {
+                    @Override
+                    public void loadMapSuccess(boolean success) {
+                        L.e("dddd","load map "+ success);
+
+//                sPkHX4LIik
+//                T.showShort("load map "+ success);
+                    }
+                });
+```
+秘钥接口的显示回调,在这个里面进行设置秘钥,仅仅调用一次就好,秘钥缓存需要进入界面两次
+```
+                ipsmapTVFragment.registerInputKeyDialogListener(new InputKeyDialogListener() {
+                    @Override
+                    public void inputKeyDialog() {
+                        ipsmapTVFragment.setIpsmapKey("sPkHX4LIik");
+                        L.e("dddd","dialog is show  ");
+                    }
+                });
+```
 如果使用自定义自定义IpsmapRobotFragment显示位置,注意activity 结束时调用 ,不要为了隐藏界面 调用这个方法
 
 ```
@@ -140,6 +169,7 @@ protected void onDestroy() {
     if (ipsmapTVFragment != null){
         ipsmapTVFragment.onDestroy();
     }
+    // 注意要在  super.onDestroy(); 前调用,否则会报错
     super.onDestroy();
 }
 

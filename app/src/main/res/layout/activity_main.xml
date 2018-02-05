@@ -73,6 +73,15 @@
             android:layout_marginBottom="8dp"
             android:text="隐藏地图"
             />
+       <Button
+           android:id="@+id/ipsmap_hide_home"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           android:layout_centerHorizontal="true"
+           android:layout_marginBottom="8dp"
+            android:text="隐藏home回退键"
+            />
         <Button
             android:id="@+id/btn_targetid"
             android:layout_width="match_parent"

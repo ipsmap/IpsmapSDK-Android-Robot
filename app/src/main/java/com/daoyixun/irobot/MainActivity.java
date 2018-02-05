@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnHintSearch;
     private FrameLayout flContent;
     private Button btnSetKey;
+    private Button btnHideHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +147,17 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }, 5000);
 
+
+        btnHideHome = (Button) findViewById(R.id.ipsmap_hide_home);
+        btnHideHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ipsmapTVFragment != null){
+                    ipsmapTVFragment.setHomeButtonShowOrHide(false);
+                }
+            }
+        });
+
         btnTargetId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,6 +199,24 @@ public class MainActivity extends AppCompatActivity {
                             .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
                             .commit();
                 }
+                ipsmapTVFragment.registerInputKeyDialogListener(new InputKeyDialogListener() {
+                    @Override
+                    public void inputKeyDialog() {
+                        ipsmapTVFragment.setIpsmapKey("sPkHX4LIik");
+                        L.e("dddd","dialog is show  ");
+                    }
+                });
+
+                ipsmapTVFragment.registerLoadMapListener(new LoadMapListener() {
+                    @Override
+                    public void loadMapSuccess(boolean success) {
+                        L.e("dddd","load map "+ success);
+
+//                sPkHX4LIik
+//                T.showShort("load map "+ success);
+                    }
+                });
+
 
             }
         }, 1500);
@@ -211,6 +241,22 @@ public class MainActivity extends AppCompatActivity {
                             .add(R.id.fl_content, ipsmapTVFragment, "ipsmap")
                             .commit();
                 }
+                ipsmapTVFragment.registerInputKeyDialogListener(new InputKeyDialogListener() {
+                    @Override
+                    public void inputKeyDialog() {
+                        ipsmapTVFragment.setIpsmapKey("sPkHX4LIik");
+                        L.e("dddd","dialog is show  ");
+                    }
+                });
+                ipsmapTVFragment.registerLoadMapListener(new LoadMapListener() {
+                    @Override
+                    public void loadMapSuccess(boolean success) {
+                        L.e("dddd","load map "+ success);
+
+//                sPkHX4LIik
+//                T.showShort("load map "+ success);
+                    }
+                });
 
             }
         }, 1500);
