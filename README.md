@@ -13,7 +13,7 @@ IpsmapSDK-Android 是一套基于 Android 4.3 及以上版本的室内地图应�
 ## 添加依赖
 
 ```
-compile ('com.ipsmap:ipsmap-robot:0.0.1.9, {
+compile ('com.ipsmap:ipsmap-robot:0.0.2.0, {
         exclude group: 'com.android.support'
     })
 ```
@@ -159,6 +159,12 @@ getSupportFragmentManager().beginTransaction().add(com.daoyixun.robot.R.id.fl_co
                         L.e("dddd","dialog is show  ");
                     }
                 });
+```
+隐藏地图加载dialog 默认是显示，在地图没有加载完成，不要点击右侧搜索
+
+```
+ipsmapTVFragment.setMapLoadingDialogHideOrShow(false);
+
 ```
 如果使用自定义自定义IpsmapRobotFragment显示位置,注意activity 结束时调用 ,不要为了隐藏界面 调用这个方法
 
