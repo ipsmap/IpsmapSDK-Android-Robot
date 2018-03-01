@@ -20,7 +20,7 @@ compile ('com.ipsmap:ipsmap-robot:0.0.2.7, {
 注意支持的cpu版本，必须在gradle中设置
 ndk {
     // 设置支持的 SO 库构架，一般而言，取你所有的库支持的构架的`交集`。
-    abiFilters 'armeabi'
+    abiFilters 'armeabi','armabi-v7a'
 }
 
 ```
