@@ -19,3 +19,19 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+#baidu
+-dontwarn com.baidu.**
+-keep class com.baidu.** {*;}
+
+#SAILS SDK
+-keep public class com.sails.engine.patterns.IconPatterns
+
+
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+-keep class com.google.gson.**{*;}
+-dontwarn com.google.gson.**
+
