@@ -22,6 +22,7 @@ public class App extends Application {
         super.onCreate();
         IpsMapRobotSDK.init(new IpsMapRobotSDK.Configuration.Builder(context)
                 .debug(true)
+                .vioceCallBack(true)
                 //预览模式下不需要激活码
 //                .preview()
                 .build());

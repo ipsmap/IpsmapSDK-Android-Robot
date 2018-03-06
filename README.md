@@ -13,7 +13,7 @@ IpsmapSDK-Android 是一套基于 Android 4.3 及以上版本的室内地图应�
 ## 添加依赖
 
 ```
-compile ('com.ipsmap:ipsmap-robot:0.0.2.9, {
+compile ('com.ipsmap:ipsmap-robot:0.0.3.1, {
         exclude group: 'com.android.support'
     })
 
@@ -71,9 +71,26 @@ sdk 使用方法,
 ``` 
 IpsMapRobotSDK.init(new IpsMapRobotSDK.Configuration.Builder(context)
     .debug(true)
+    //不使用sdk的语音播报，添加回调自己播放
+//     .vioceCallBack(true)
     //预览模式下不需要激活码
 //                .preview()
     .build());
+
+
+如果自己播放语音请添加回调接口
+
+      instance = VoiceCallBackManager.getInstance(getApplicationContext());
+
+        instance.setTextToVioceListener(new TextToVioceListener() {
+            @Override
+            public void textToVoice(String contain, boolean isForcePlay) {
+                L.e("dddd","TextToVioceListener :" + contain + " isForcePaly ； "+ isForcePlay);
+                // 进行list维护播报的信息，建议以下播报方式
+                //1.强制播报，清除list，播报当前的语音
+                //2.非强制播报，加入列表，播报完成第一条后播报第二条，中间间隔3s。
+            }
+        });
                 
 ```
 
