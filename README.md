@@ -194,6 +194,17 @@ getSupportFragmentManager().beginTransaction().add(com.daoyixun.robot.R.id.fl_co
 ipsmapTVFragment.setMapLoadingDialogHideOrShow(false);
 
 ```
+
+点击结束导航的回调
+```
+                 ipsmapTVFragment.setStopNavListener( new StopNavListener(){
+                     @Override
+                     public void stopNav() {
+                         L.e("ddddd ","stop nav ");
+                     }
+                 });
+```
+
 如果使用自定义自定义IpsmapRobotFragment显示位置,注意activity 结束时调用 ,不要为了隐藏界面 调用这个方法
 
 ```
