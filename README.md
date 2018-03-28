@@ -58,6 +58,10 @@ try {
     //需要传入参数,可以传入参数,不需要可以不传入
      //String id = "ddK075hevW";
     //intent.putExtra("target_id", id);
+    //isExit 默认是false 30s自动回到默认状态, true 表示30s退出 app或者sdk
+     //intent.putExtra("isExit" ,true);
+      //isHintStatus 默认true ,下面虚拟按钮,默认是隐藏的
+      //  intent.putExtra("isHintStatus" ,false);
     startActivity(intent);
 } catch (Exception e) {
     Toast.makeText(getBaseContext(),"没有安装道一循",Toast.LENGTH_SHORT).show();
